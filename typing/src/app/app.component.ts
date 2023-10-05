@@ -10,14 +10,24 @@ export class AppComponent {
 
   randomText = lorem.sentence();
 
-  successTyping: boolean = false;
-  onInput(text: string) {
+  enteredText = '';
+  onInput(text: string): void {
     console.log(text)
-    if(text === this.randomText){
-      this.successTyping=true;
-    }else{
+    this.enteredText = text;
 
-      this.successTyping= false;
-    }
   }
+  compare(randomLetter: string, enteredLetter: string): ColorClass {
+    if (!enteredLetter) {
+      return ColorClass.PENDING;
+
+    }
+    return randomLetter === enteredLetter ? ColorClass.CORRECT : ColorClass.INCORRECT;
+  }
+
+}
+
+export enum ColorClass {
+  INCORRECT = 'incorrect',
+  CORRECT = 'correct',
+  PENDING = 'pending'
 }

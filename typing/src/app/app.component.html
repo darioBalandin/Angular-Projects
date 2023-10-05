@@ -4,15 +4,15 @@
     <div class="box column is-one-third">
 
       <h1 class="title has-text-centered">Typing Challenge</h1>
-
-      <p class="has-text-centered">{{randomText}}</p>
+      <span [class]="compare(letter,enteredText[i])" *ngFor="let letter of randomText.split('');let i = index;"
+      >{{letter}}</span>
       <div class="field">
 
         <input class="input" type="text" (input)="onInput($any($event.target).value)">
 
       </div>
 
-      <div class="box has-text-centered" *ngIf="successTyping===true">
+      <div class="box has-text-centered" *ngIf="enteredText===randomText">
         <h1 class="title">Success!!</h1>
 
       </div>
