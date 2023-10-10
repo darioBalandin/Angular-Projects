@@ -1,0 +1,11 @@
+<div class="ui placeholder">
+  <!-- Directiva estructural, si true en la propiedad, o en el parent component template -->
+  <div *ngIf="header" class="image header">
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+  <div class="paragraph">
+    <!-- Directiva estructural asociando propiedad lines con el numero de veces que se va a renderizar el elemento -->
+    <div *appTimes="lines" class="line" ></div>
+  </div>
+</div>
