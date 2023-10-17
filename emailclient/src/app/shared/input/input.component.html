@@ -1,0 +1,24 @@
+<div class="field">
+  <label>{{label}}</label>
+  <input [formControl]="control" [type]="type">
+  <ng-container *ngIf="showErrors()">
+    <div class="ui pointing red basic label">
+
+
+      <p *ngIf="$any(control.errors)['required']">Value is required</p>
+
+      <p *ngIf="$any(control.errors)['minlength']">Minimum length is {{control.errors?.['minlength'].requiredLength}}</p>
+
+      <p *ngIf="$any(control.errors)['maxlength']">Maximum length is {{control.errors?.['maxlength'].requiredLength}}</p>
+
+      <p *ngIf="$any(control.errors)['usernameNotUnique']">Username already taken</p>
+
+      <p *ngIf="$any(control.errors)['pattern']">Invalid format</p>
+
+
+
+    </div>
+  </ng-container>
+
+
+</div>
