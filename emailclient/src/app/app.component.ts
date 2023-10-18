@@ -1,10 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'emailclient';
+export class AppComponent implements OnInit {
+
+  signedIn = false;
+
+  constructor(private authService: AuthService) { }
+  async ngOnInit(): Promise<void> {
+
+    this.authService.signedIn$.subscribe((signedIn) => {
+      this.signedIn = signedIn;
+    })
+    await this.authService.checkAuth()
+
+
+
+    // setTimeout(() => {
+
+    //   this.authService.signOut()
+    // }, 3000);
+
+
+  }
+
+
+
 }
