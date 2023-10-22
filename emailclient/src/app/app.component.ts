@@ -8,7 +8,7 @@ import { AuthService } from './auth/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  signedIn = false;
+  signedIn : boolean | null= false;
 
   constructor(private authService: AuthService) { }
   async ngOnInit(): Promise<void> {
@@ -17,17 +17,5 @@ export class AppComponent implements OnInit {
       this.signedIn = signedIn;
     })
     await this.authService.checkAuth()
-
-
-
-    // setTimeout(() => {
-
-    //   this.authService.signOut()
-    // }, 3000);
-
-
   }
-
-
-
 }

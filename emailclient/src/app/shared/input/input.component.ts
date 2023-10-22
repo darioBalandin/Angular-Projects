@@ -18,6 +18,10 @@ export class InputComponent {
   control: FormControl;
 
 
+  @Input()
+  controlType: string= 'input';
+
+
   showErrors() {
 
     const { dirty, touched, errors } = this.control;

@@ -10,21 +10,20 @@ export class AuthHttpInterceptor implements HttpInterceptor {
     const modifiedReq = req.clone({
       withCredentials: true
     })
-    console.log(req)
 
-    console.log(modifiedReq)
+    // console.log(modifiedReq)
     return next.handle(modifiedReq)
-    .pipe(
-      filter(
-        val => val.type === HttpEventType.Response
-      ),
+    // .pipe(
+    //   filter(
+    //     val => val.type === HttpEventType.Response
+    //   ),
 
-      tap(value => {
+    //   tap(value => {
 
 
-        console.log(value);
-      })
-    )
+    //     console.log(value);
+    //   })
+    // )
 
   }
 

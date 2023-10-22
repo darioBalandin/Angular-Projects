@@ -10,7 +10,9 @@ export class AuthService {
   private ROOT_URL = 'https://api.angular-email.com';
 
 
-  signedIn$ = new BehaviorSubject(false);
+  signedIn$ = new BehaviorSubject<boolean | null>(null);
+
+  username: string = '';
 
   constructor(private readonly http: HttpClient) { }
 
@@ -25,15 +27,36 @@ export class AuthService {
     }
   }
 
+  async signIn(credentials: Credentials): Promise<SignUpResponse> {
+    try {
+      const response = await firstValueFrom(
+        this.http.post<SignUpResponse>(`${this.ROOT_URL}/auth/signin`, credentials,
+        ));
+      this.username = response.username;
+      this.signedIn$.next(true);
+
+      return response;
+    } catch (error) {
+
+      throw new Error("error")
+    }
+  }
+
+
+
   async signUp(credentials: Credentials): Promise<SignUpResponse> {
     try {
       const response = await firstValueFrom(
         this.http.post<SignUpResponse>(`${this.ROOT_URL}/auth/signup`, credentials,
         ));
+
+      this.username = response.username;
       this.signedIn$.next(true);
 
       return response;
     } catch (error) {
+
+
       throw new Error("error")
     }
   }
@@ -43,9 +66,9 @@ export class AuthService {
     const response = await firstValueFrom(this.http.get<SignedInResponse>(`${this.ROOT_URL}/auth/signedin`));
 
     if (response.authenticated) {
+      this.username = response.username;
       this.signedIn$.next(true);
     }
-    console.log(response)
 
   }
 
@@ -66,11 +89,12 @@ export class AuthService {
 export type Credentials = {
   username: string,
   password: string,
-  passwordConfirmation: string
+  passwordConfirmation?: string
 }
 
 export type SignUpResponse = {
-  username: string
+  username: string,
+  password: string
 }
 
 export type SignedInResponse = {
