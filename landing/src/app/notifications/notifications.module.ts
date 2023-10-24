@@ -10,6 +10,7 @@ import { NotificationListComponent } from './notification-list/notification-list
   ],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [NotificationListComponent]
 })
 export class NotificationsModule { }
